@@ -40,24 +40,75 @@ svg circle {
     stroke: white;
     stroke-width: 1px;
     pointer-events: auto;
+    --color-departures: steelblue;
+    --color-arrivals: darkorange;
+    --color: color-mix(
+    in oklch,
+    var(--color-departures) calc(100% * var(--departure-ratio)),
+    var(--color-arrivals)
+    );
+    fill: var(--color);
 }
 
-#timeSlider {
-    width: 200px;
+header {
+    display: flex;
+    align-items: baseline;
+    gap: 35em;
+    font-family: Arial, sans-serif;
+} 
+
+time, em{
+    display: block; 
 }
 
-#timeDisplay {
-    display: block;
-    margin-top: 0.5em;
-    font-weight: bold;
-}
-
-#anyTimeText {
+em {
+    color: gray;
     font-style: italic;
-    color: #666;
-    display: block;
 }
 
-#timeSlider, #timeDisplay, #anyTimeText {
-    pointer-events: auto;
+#time-slider {
+    width: 335px;
 }
+
+/* Define shared color variables */
+:root {
+    --color-departures: #1f77b4; /* Blue for departures */
+    --color-arrivals: #ff7f0e;  /* Orange for arrivals */
+}
+
+/* Style the legend container */
+.legend {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Space between legend items */
+    margin-block: 10px; /* Space between the map and legend */
+    font-size: 14px;
+}
+
+/* Style legend items */
+.legend > div {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Small gap between swatch and text */
+    position: relative;
+}
+
+/* Create gradient swatches using the departure ratio */
+.legend > div::before {
+    content: "";
+    display: inline-block;
+    width: 14px; /* Swatch width */
+    height: 14px; /* Swatch height */
+    border-radius: 50%;
+    background: color-mix(
+        in oklch,
+        var(--color-departures) calc(100% * var(--departure-ratio)),
+        var(--color-arrivals)
+    );
+}
+
+#legend-type {
+    color: rgb(140, 140, 140);
+}
+
+
